@@ -7,6 +7,7 @@ import org.json4s._
 import org.json4s.native.JsonMethods._
 import org.scalatest.{Matchers, WordSpec}
 import Directives._
+import akka.http.scaladsl.model.StatusCodes
 import org.keycloak.adapters.KeycloakDeploymentBuilder
 
 /**
@@ -58,6 +59,7 @@ class FirstSpec extends WordSpec with Matchers with ScalatestRouteTest {
       val accessToken = r.body.right.get("access_token")
 
       Get() ~> addHeader("Authorization", s"Bearer $accessToken") ~> testRoutes ~> check {
+        status shouldEqual StatusCodes.OK
         responseAs[String] shouldEqual "ok"
       }
     }
