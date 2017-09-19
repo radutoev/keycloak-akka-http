@@ -14,7 +14,10 @@ import org.keycloak.adapters.KeycloakDeploymentBuilder
   */
 class FirstSpec extends WordSpec with Matchers with ScalatestRouteTest {
   val oauth2 = new OAuth2Authorization(
-    new KeycloakTokenVerifier(KeycloakDeploymentBuilder.build(getClass.getResourceAsStream("/keycloak.json")))
+    new KeycloakTokenVerifier(
+      "g6Rf-QIkxtPwfHgUDymfz0FTh1efCkiBga4zzgtkrg8",
+      KeycloakDeploymentBuilder.build(getClass.getResourceAsStream("/keycloak.json"))
+    )
   )
 
   import oauth2._

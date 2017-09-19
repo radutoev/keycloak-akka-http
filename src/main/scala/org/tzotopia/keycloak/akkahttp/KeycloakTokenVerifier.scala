@@ -11,7 +11,7 @@ import scala.concurrent.{ExecutionContext, Future}
 /**
   * Created by Radu Toev on 19.09.2017.
   */
-class KeycloakTokenVerifier(keycloakDeployment: KeycloakDeployment) {
+class KeycloakTokenVerifier(kId: String, keycloakDeployment: KeycloakDeployment) {
   implicit val executionContext = ExecutionContext.fromExecutor(new ForkJoinPool(2))
 
   def verifyToken(token: String): Future[AccessToken] = {
@@ -19,7 +19,7 @@ class KeycloakTokenVerifier(keycloakDeployment: KeycloakDeployment) {
       RSATokenVerifier.verifyToken(
         token,
         keycloakDeployment.getPublicKeyLocator
-            .getPublicKey("g6Rf-QIkxtPwfHgUDymfz0FTh1efCkiBga4zzgtkrg8", keycloakDeployment),
+            .getPublicKey(kId, keycloakDeployment),
         keycloakDeployment.getRealmInfoUrl
       )
     }
