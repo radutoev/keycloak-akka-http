@@ -1,0 +1,8 @@
+{
+  "realm": "AkkaHttpIntegration",
+  "realm-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjQEb9WGZajZgqPjpQtUydEiMrgiELwXrCWBRkEQaEaxRiMNCKpFl7UWuW1H9mJfpwqDdtIftD3WaBQT3aK/Ac/zM3uu8nkGdX25OA7soG9PJewt5CMItbM1Y0PssFj3+mKRsaWq3P8na+t9fbtNdxXeX8+kC5Y2ACYdvwMAGCbirUkRWWPJ+npL1vQKdazRHWI3xCRgZz0ihMMIkVnzzfNz1EZgDyAhnbF92LFuB8mr07MFGe18ro/gjRVcmqvMxZR74JU1rYa+JlC78A5tWHxoMVlv68RWKMn79RfWMG5J5wjqcQ9YdF4Dtrlxg0/gGRSit+AzNVwp/zoJCFwBbhwIDAQAB",
+  "bearer-only": true,
+  "auth-server-url": "http://localhost:8080/auth",
+  "ssl-required": "external",
+  "resource": "akka-http-api"
+}

@@ -22,6 +22,8 @@ val akka = Seq(
 val keycloak = Seq(
   "org.keycloak" % "keycloak-adapter-core" % keycloakV,
   "org.keycloak" % "keycloak-core" % keycloakV,
+  "org.jboss.logging" % "jboss-logging" % "3.3.1.Final",
+  "org.apache.httpcomponents" % "httpclient" % "4.5.3"
 )
 
 val json4s = Seq(

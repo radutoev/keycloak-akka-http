@@ -7,16 +7,25 @@ import org.json4s._
 import org.json4s.native.JsonMethods._
 import org.scalatest.{Matchers, WordSpec}
 import Directives._
+import org.keycloak.adapters.KeycloakDeploymentBuilder
 
 /**
   * Created by Radu Toev on 19.09.2017.
   */
 class FirstSpec extends WordSpec with Matchers with ScalatestRouteTest {
+  val oauth2 = new OAuth2Authorization(
+    new KeycloakTokenVerifier(KeycloakDeploymentBuilder.build(getClass.getResourceAsStream("/keycloak.json")))
+  )
+
+  import oauth2._
+
   val testRoutes = {
-    get {
-      pathSingleSlash {
-        complete {
-          "ok"
+    authenticated { token =>
+      get {
+        pathSingleSlash {
+          complete {
+            "ok"
+          }
         }
       }
     }
@@ -45,7 +54,7 @@ class FirstSpec extends WordSpec with Matchers with ScalatestRouteTest {
 
       val accessToken = r.body.right.get("access_token")
 
-      Get() ~> testRoutes ~> check {
+      Get() ~> addHeader("Authorization", s"Bearer $accessToken") ~> testRoutes ~> check {
         responseAs[String] shouldEqual "ok"
       }
     }
