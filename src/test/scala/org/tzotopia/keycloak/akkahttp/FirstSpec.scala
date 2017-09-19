@@ -1,15 +1,27 @@
 package org.tzotopia.keycloak.akkahttp
 
 import akka.http.scaladsl.testkit.ScalatestRouteTest
+import akka.http.scaladsl.server._
 import com.softwaremill.sttp._
 import org.json4s._
 import org.json4s.native.JsonMethods._
 import org.scalatest.{Matchers, WordSpec}
+import Directives._
 
 /**
   * Created by Radu Toev on 19.09.2017.
   */
 class FirstSpec extends WordSpec with Matchers with ScalatestRouteTest {
+  val testRoutes = {
+    get {
+      pathSingleSlash {
+        complete {
+          "ok"
+        }
+      }
+    }
+  }
+
   "An authenticated user" should {
     "access a secured endpoint" in {
       //get a token
@@ -32,6 +44,10 @@ class FirstSpec extends WordSpec with Matchers with ScalatestRouteTest {
           .send()
 
       val accessToken = r.body.right.get("access_token")
+
+      Get() ~> testRoutes ~> check {
+        responseAs[String] shouldEqual "ok"
+      }
     }
   }
 }
