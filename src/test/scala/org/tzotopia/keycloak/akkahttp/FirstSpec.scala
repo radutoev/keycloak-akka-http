@@ -62,4 +62,12 @@ class FirstSpec extends WordSpec with Matchers with ScalatestRouteTest {
       }
     }
   }
+
+  "An unauthenticated user" should {
+    "not be allowed to access a secured endpoint" in {
+      Get() ~> testRoutes ~> check {
+        rejection shouldEqual AuthorizationFailedRejection
+      }
+    }
+  }
 }
